@@ -9,6 +9,7 @@ on:
       - ".github/workflows/databricks-ci.yml"
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: databricks-ci-${{ github.ref }}
