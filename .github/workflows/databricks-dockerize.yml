@@ -24,6 +24,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: "."
-          file: "Dockerfile.notebooks"
+          file: "Dockerfile"
           push: false
-          tags: "notebooks:${{ github.sha }}"
+          tags: "lifeboat:${{ github.sha }}"
