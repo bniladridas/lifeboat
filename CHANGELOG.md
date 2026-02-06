@@ -7,6 +7,7 @@ All notable changes to the Lifeboat project are documented here.
 ## [1.0.0] - 2026-02-06
 
 ### Added
+
 - **PR #3**: Complete lifeboat notebook with EDA, training, and inference
   - Added `lifeboat.ipynb` - comprehensive notebook covering data exploration, model training, and prediction
   - Added matplotlib and seaborn to requirements for visualizations
@@ -14,15 +15,21 @@ All notable changes to the Lifeboat project are documented here.
   - Matches ModelScope deployment configuration
 
 - **PR #2**: Test and e2e workflow
-  - Added test infrastructure
-  - Added end-to-end workflow for CI/CD
+  - Added unit tests and end-to-end tests for code quality and reliability
+  - Added GitHub Actions workflow to run tests automatically on push/PR
+  - Configured pre-commit hooks with ruff and black for code quality
+  - Added API reference documentation and quick start guides
+  - Added docstrings to main modules for better code understanding
+  - Created context tracker for tracking improvements
 
 ### Changed
+
 - Updated requirements.txt with visualization dependencies
 
 ## [0.1.0] - Initial Release
 
 ### Added
+
 - Titanic survival prediction model
 - Python SDK (`lifeboat_sdk/`)
 - ModelScope upload configuration
