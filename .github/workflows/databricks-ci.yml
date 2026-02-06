@@ -10,21 +10,6 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
-    inputs:
-      deploy:
-        description: "Deploy to environment"
-        required: false
-        default: ""
-        type: choice
-        options:
-          - ""
-          - dev
-          - prod
-      image:
-        description: "Image to deploy (optional, uses latest build if empty)"
-        required: false
-        default: ""
-        type: string
 
 concurrency:
   group: databricks-ci-${{ github.ref }}
@@ -133,28 +118,29 @@ jobs:
   deploy-dev:
     name: Deploy Dev
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' || (github.event_name == 'workflow_dispatch' && inputs.deploy == 'dev')
+    needs: build
+    if: github.ref == 'refs/heads/develop'
     environment: dev
 
     steps:
       - name: Deploy to Dev
         run: |
-          IMAGE="${{ inputs.image || needs.build.outputs.image }}"
-          echo "Deploying $IMAGE to dev"
-          docker pull $IMAGE || true
+          echo "Deploying ${{ needs.build.outputs.image }} to dev"
+          docker pull ${{ needs.build.outputs.image }}
           echo "Dev deployment complete"
 
   deploy-prod:
     name: Deploy Prod
     runs-on: ubuntu-latest
-    needs: test
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.deploy == 'prod')
+    needs:
+      - build
+      - test
+    if: startsWith(github.ref, 'refs/tags/v')
     environment: production
 
     steps:
       - name: Deploy to Prod
         run: |
-          IMAGE="${{ inputs.image || needs.build.outputs.image }}"
-          echo "Deploying $IMAGE to prod"
+          echo "Deploying ${{ needs.build.outputs.image }} to prod"
           echo "Version: ${{ needs.test.outputs.version }}"
           echo "Production deployment complete"
