@@ -114,6 +114,9 @@ jobs:
       name: dev
       url: https://dev.example.com
     steps:
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
       - name: Deploy
         run: |
           echo "Deploying image ${{ needs.build.outputs.image }} to dev"
