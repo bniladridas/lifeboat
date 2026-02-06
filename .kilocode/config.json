@@ -1,0 +1,24 @@
+{
+  "project": {
+    "name": "lifeboat",
+    "description": "Titanic survival prediction model with inference, training, and upload capabilities",
+    "type": "python"
+  },
+  "context": {
+    "language": "python",
+    "frameworks": ["scikit-learn", "xgboost", "lightgbm", "pandas", "numpy"],
+    "testing": "pytest"
+  },
+  "commands": {
+    "test": "python -m pytest tests/ -v",
+    "test-e2e": "python -m pytest tests/test_e2e.py -v",
+    "lint": "ruff check . && black --check .",
+    "format": "black . && ruff check --fix .",
+    "run-inference": "python inference.py"
+  },
+  "files": {
+    "main": ["inference.py", "train.py", "upload.py"],
+    "tests": ["tests/"],
+    "models": ["models/"]
+  }
+}

@@ -1,11 +1,15 @@
 import joblib
 import pandas as pd
-import numpy as np
 
 MODEL_DIR = "models"
 
 
 def load_artifacts():
+    """Load trained model and preprocessing artifacts.
+
+    Returns:
+        tuple: (model, scaler, features, le_sex, le_embarked)
+    """
     model = joblib.load(f"{MODEL_DIR}/titanic_model.pkl")
     scaler = joblib.load(f"{MODEL_DIR}/scaler.pkl")
     features = joblib.load(f"{MODEL_DIR}/features.pkl")
@@ -15,6 +19,20 @@ def load_artifacts():
 
 
 def predict(pclass, sex, age, sibsp, parch, fare, embarked):
+    """Predict Titanic survival probability for a passenger.
+
+    Args:
+        pclass: Passenger class (1, 2, or 3)
+        sex: Gender ("male" or "female")
+        age: Passenger age
+        sibsp: Number of siblings/spouses aboard
+        parch: Number of parents/children aboard
+        fare: Ticket fare
+        embarked: Port of embarkation ("C", "Q", or "S")
+
+    Returns:
+        dict: {"survival": int, "probability": float}
+    """
     model, scaler, features, le_sex, le_embarked = load_artifacts()
 
     family_size = sibsp + parch + 1
@@ -55,7 +73,5 @@ def predict(pclass, sex, age, sibsp, parch, fare, embarked):
 
 
 if __name__ == "__main__":
-    result = predict(
-        pclass=3, sex="male", age=25, sibsp=0, parch=0, fare=7.25, embarked="S"
-    )
+    result = predict(pclass=3, sex="male", age=25, sibsp=0, parch=0, fare=7.25, embarked="S")
     print(f"Result: {result}")

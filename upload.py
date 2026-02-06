@@ -14,6 +14,10 @@ UPLOAD_DIR = "modelscope_upload"
 
 
 def prepare_upload():
+    """Prepare files for ModelScope upload.
+
+    Copies inference code, requirements, and model files to upload directory.
+    """
     os.makedirs(UPLOAD_DIR, exist_ok=True)
 
     files_to_upload = [
@@ -57,6 +61,11 @@ def prepare_upload():
 
 
 def upload_to_modelscope(repo_id="bniladridas/lifeboat"):
+    """Upload prepared model to ModelScope.
+
+    Args:
+        repo_id: ModelScope repository ID (default: "bniladridas/lifeboat")
+    """
     from modelscope.hub.api import HubApi
 
     prepare_upload()

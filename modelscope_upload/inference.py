@@ -1,6 +1,5 @@
 import joblib
 import pandas as pd
-import numpy as np
 
 MODEL_DIR = "models"
 
@@ -55,7 +54,5 @@ def predict(pclass, sex, age, sibsp, parch, fare, embarked):
 
 
 if __name__ == "__main__":
-    result = predict(
-        pclass=3, sex="male", age=25, sibsp=0, parch=0, fare=7.25, embarked="S"
-    )
+    result = predict(pclass=3, sex="male", age=25, sibsp=0, parch=0, fare=7.25, embarked="S")
     print(f"Result: {result}")
