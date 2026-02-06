@@ -76,7 +76,7 @@ jobs:
       - name: Import notebooks
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          databricks workspace import lifeboat.ipynb --language python --overwrite || true
+          databricks workspace import lifeboat.ipynb /Users/${{ github.actor }}/lifeboat --language python --overwrite || true
 
   build:
     name: Build Image
