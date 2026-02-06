@@ -1,17 +1,15 @@
-import pandas as pd
-import numpy as np
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.ensemble import GradientBoostingClassifier, RandomForestClassifier
-from sklearn.metrics import accuracy_score, classification_report, roc_auc_score
-import xgboost as xgb
-import lightgbm as lgb
-import joblib
 import os
 
-TITANIC_URL = (
-    "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
-)
+import joblib
+import lightgbm as lgb
+import pandas as pd
+import xgboost as xgb
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import accuracy_score, roc_auc_score
+from sklearn.model_selection import cross_val_score, train_test_split
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
+TITANIC_URL = "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv"
 DATA_PATH = "titanic.csv"
 MODEL_DIR = "models"
 
@@ -19,12 +17,25 @@ os.makedirs(MODEL_DIR, exist_ok=True)
 
 
 def load_data():
+    """Load Titanic dataset from online source.
+
+    Returns:
+        pd.DataFrame: Raw Titanic dataset with passenger information
+    """
     df = pd.read_csv(TITANIC_URL)
     print(f"Loaded {len(df)} samples")
     return df
 
 
 def preprocess(df):
+    """Preprocess Titanic data and engineer features.
+
+    Args:
+        df: Raw Titanic DataFrame
+
+    Returns:
+        tuple: (X, y, features) - Features, target, and feature names
+    """
     df = df.copy()
 
     df.loc[:, "Age"] = df["Age"].fillna(df["Age"].median())
@@ -67,6 +78,15 @@ def preprocess(df):
 
 
 def train_models(X_train, y_train):
+    """Train multiple classification models.
+
+    Args:
+        X_train: Scaled training features
+        y_train: Training labels
+
+    Returns:
+        dict: Model results with trained model, CV mean, and CV std
+    """
     models = {
         "XGBoost": xgb.XGBClassifier(
             n_estimators=200,
@@ -101,14 +121,22 @@ def train_models(X_train, y_train):
             "cv_mean": cv_scores.mean(),
             "cv_std": cv_scores.std(),
         }
-        print(
-            f"{name}: CV Accuracy = {cv_scores.mean():.4f} (+/- {cv_scores.std():.4f})"
-        )
+        print(f"{name}: CV Accuracy = {cv_scores.mean():.4f} (+/- {cv_scores.std():.4f})")
 
     return results
 
 
 def evaluate_and_save(models, X_test, y_test):
+    """Evaluate models and save the best one.
+
+    Args:
+        models: Dictionary of trained models
+        X_test: Scaled test features
+        y_test: Test labels
+
+    Returns:
+        tuple: (best_model_name, best_model)
+    """
     best_model = None
     best_score = 0
 
@@ -160,7 +188,7 @@ def main():
     joblib.dump(features, f"{MODEL_DIR}/features.pkl")
 
     print(f"\n{'=' * 50}")
-    print(f"Training complete!")
+    print("Training complete!")
     print(f"Model saved to: {MODEL_DIR}/titanic_model.pkl")
     print(f"Features: {features}")
     print("=" * 50)

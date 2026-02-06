@@ -1,12 +1,13 @@
-import joblib
 import os
+
+import joblib
 import pandas as pd
-import numpy as np
 
 try:
     from modelscope import Model, PipelineMixin
 except ImportError:
     PipelineMixin = object
+    Model = None
 
 
 class Lifeboat(PipelineMixin):
