@@ -1,10 +1,9 @@
-import pytest
-import pandas as pd
-import numpy as np
-import joblib
 import os
 import sys
 
+import numpy as np
+import pandas as pd
+import pytest
 
 MODEL_DIR = "models"
 
@@ -39,9 +38,7 @@ class TestEndToEnd:
     def test_full_prediction_flow_male_single(self):
         from inference import predict
 
-        result = predict(
-            pclass=3, sex="male", age=25, sibsp=0, parch=0, fare=7.25, embarked="S"
-        )
+        result = predict(pclass=3, sex="male", age=25, sibsp=0, parch=0, fare=7.25, embarked="S")
 
         assert "survival" in result
         assert "probability" in result
@@ -51,9 +48,7 @@ class TestEndToEnd:
     def test_full_prediction_flow_female_first_class(self):
         from inference import predict
 
-        result = predict(
-            pclass=1, sex="female", age=30, sibsp=1, parch=1, fare=100, embarked="C"
-        )
+        result = predict(pclass=1, sex="female", age=30, sibsp=1, parch=1, fare=100, embarked="C")
 
         assert "survival" in result
         assert "probability" in result
@@ -63,9 +58,7 @@ class TestEndToEnd:
     def test_full_prediction_flow_family_travel(self):
         from inference import predict
 
-        result = predict(
-            pclass=2, sex="male", age=45, sibsp=2, parch=2, fare=50, embarked="Q"
-        )
+        result = predict(pclass=2, sex="male", age=45, sibsp=2, parch=2, fare=50, embarked="Q")
 
         assert "survival" in result
         assert "probability" in result
@@ -75,9 +68,7 @@ class TestEndToEnd:
     def test_full_prediction_flow_child_traveling(self):
         from inference import predict
 
-        result = predict(
-            pclass=3, sex="female", age=10, sibsp=3, parch=1, fare=15, embarked="S"
-        )
+        result = predict(pclass=3, sex="female", age=10, sibsp=3, parch=1, fare=15, embarked="S")
 
         assert "survival" in result
         assert "probability" in result
@@ -87,9 +78,7 @@ class TestEndToEnd:
     def test_full_prediction_flow_elderly_passenger(self):
         from inference import predict
 
-        result = predict(
-            pclass=1, sex="male", age=70, sibsp=0, parch=0, fare=200, embarked="C"
-        )
+        result = predict(pclass=1, sex="male", age=70, sibsp=0, parch=0, fare=200, embarked="C")
 
         assert "survival" in result
         assert "probability" in result
@@ -116,8 +105,8 @@ class TestEndToEnd:
             assert result["probability"] == results[0]["probability"]
 
     def test_scaler_input_dimensions(self):
+
         from inference import load_artifacts
-        import numpy as np
 
         model, scaler, features, le_sex, le_embarked = load_artifacts()
 
@@ -142,8 +131,8 @@ class TestEndToEnd:
         assert sample_scaled.shape[1] == len(features)
 
     def test_model_prediction_returns_valid_output(self):
-        from inference import load_artifacts, predict
-        import numpy as np
+
+        from inference import load_artifacts
 
         model, scaler, features, le_sex, le_embarked = load_artifacts()
 
@@ -192,8 +181,9 @@ class TestCLIInterface:
 
 class TestFeatureEngineering:
     def test_family_size_calculation(self):
+        from unittest.mock import MagicMock, patch
+
         from inference import predict
-        from unittest.mock import patch, MagicMock
 
         model = MagicMock()
         model.predict.return_value = [0]
