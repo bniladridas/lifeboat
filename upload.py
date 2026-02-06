@@ -21,6 +21,11 @@ def prepare_upload():
         "requirements.txt",
         "README.md",
         "modelscope_config.json",
+        "lifeboat_sdk/__init__.py",
+        "lifeboat_sdk/lifeboat.py",
+        "lifeboat_sdk/config.json",
+        "lifeboat_sdk/setup.py",
+        "lifeboat_sdk/requirements.txt",
     ]
 
     for f in files_to_upload:
@@ -30,6 +35,19 @@ def prepare_upload():
         src = os.path.join(MODEL_DIR, f)
         dst = os.path.join(UPLOAD_DIR, f)
         shutil.copy(src, dst)
+
+    sdk_pkl_files = [
+        "features.pkl",
+        "scaler.pkl",
+        "le_sex.pkl",
+        "le_embarked.pkl",
+        "titanic_model.pkl",
+    ]
+    for f in sdk_pkl_files:
+        src = os.path.join("lifeboat_sdk", f)
+        dst = os.path.join(UPLOAD_DIR, f)
+        if os.path.exists(src):
+            shutil.copy(src, dst)
 
     with open(os.path.join(UPLOAD_DIR, ".gitignore"), "w") as f:
         f.write("__pycache__/\n*.pyc\n.venv/\n")
