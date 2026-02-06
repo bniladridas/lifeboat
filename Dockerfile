@@ -2,7 +2,6 @@ FROM jupyter/datascience-notebook:latest
 WORKDIR /home/user
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-COPY notebooks/ ./notebooks/
-COPY src/ ./src/
+COPY . .
 USER user
-CMD ["python", "notebooks/run.py"]
+CMD ["python", "lifeboat.ipynb"]
