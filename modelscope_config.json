@@ -1,0 +1,15 @@
+{
+  "modelId": "bniladridas/lifeboat",
+  "task": "tabular-classification",
+  "license": "MIT",
+  "description": "A lightweight gradient boosting model for Titanic passenger survival prediction. Trained on the classic Titanic dataset with 11 engineered features.",
+  "framework": "scikit-learn",
+  "parameters": {
+    "num_features": 11,
+    "model_type": "GradientBoostingClassifier"
+  },
+  "performance": {
+    "test_accuracy": 0.8101,
+    "test_auc_roc": 0.8088
+  }
+}
