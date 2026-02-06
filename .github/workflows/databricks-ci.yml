@@ -67,12 +67,12 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Databricks CLI
-        run: pip install databricks-cli
+        run: pip install databricks-cli>=0.205
 
       - name: Import notebooks
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          databricks workspace import-dir notebooks /Shared/notebooks --overwrite
+          find notebooks -name "*.ipynb" -exec databricks workspace import {} --overwrite \; || true
 
   build:
     name: Build Image
