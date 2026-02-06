@@ -11,6 +11,8 @@ def main() -> int:
     """Validate all notebooks."""
     errors = 0
     for notebook in Path(".").rglob("*.ipynb"):
+        if any(part in {".git", ".venv", "node_modules"} for part in notebook.parts):
+            continue
         try:
             nbformat.read(notebook, as_version=4)
             print(f"OK: {notebook}")
