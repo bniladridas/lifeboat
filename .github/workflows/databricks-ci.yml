@@ -72,7 +72,7 @@ jobs:
       - name: Import notebooks
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          find notebooks -name "*.ipynb" -exec databricks workspace import {} --overwrite \; || true
+          databricks workspace import lifeboat.ipynb --language python --overwrite || true
 
   build:
     name: Build Image
