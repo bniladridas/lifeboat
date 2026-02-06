@@ -66,19 +66,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cache Databricks CLI
-        id: cache-cli
-        uses: actions/cache@v4
-        with:
-          path: ~/.databricks
-          key: databricks-cli-v1
-
       - name: Install Databricks CLI
-        if: steps.cache-cli.outputs.cache-hit != 'true'
-        run: curl -fsSL https://databricks.com/cli/install.sh | sh
+        run: pip install databricks-cli
 
       - name: Import notebooks
         run: |
+          export PATH="$HOME/.local/bin:$PATH"
           databricks workspace import-dir notebooks /Shared/notebooks --overwrite
 
   build:
