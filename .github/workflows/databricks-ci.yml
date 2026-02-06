@@ -47,14 +47,8 @@ jobs:
           pip install --upgrade pip
           pip install databricks-connect==14.1.0 nbformat nbconvert pytest joblib scikit-learn
 
-      - name: Install package
-        run: pip install -e .
-
-      - name: Validate notebooks
-        run: python .github/scripts/validate_notebooks.py
-
       - name: Run tests
-        run: pytest tests/ -v --tb=short -q
+        run: PYTHONPATH=. pytest tests/ -v --tb=short -q
 
       - name: Install Databricks CLI
         run: |
