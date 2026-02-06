@@ -46,3 +46,17 @@ print(result)  # {"survival": 0, "probability": 0.01}
 ```bash
 pip install -r requirements.txt
 ```
+
+## Use as SDK
+
+```bash
+pip install lifeboat-sdk
+```
+
+```python
+from lifeboat_sdk import Lifeboat
+
+model = Lifeboat()
+model.load()
+model.predict(pclass=3, sex="male", age=25, sibsp=0, parch=0, fare=7.25, embarked="S")
+```

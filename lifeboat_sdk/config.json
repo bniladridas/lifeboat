@@ -1,0 +1,28 @@
+{
+  "modelId": "bniladridas/lifeboat",
+  "task": "tabular-classification",
+  "license": "MIT",
+  "description": "A lightweight gradient boosting model for Titanic passenger survival prediction. Trained on the classic Titanic dataset with 11 engineered features.",
+  "framework": "scikit-learn",
+  "parameters": {
+    "num_features": 11,
+    "model_type": "GradientBoostingClassifier"
+  },
+  "performance": {
+    "test_accuracy": 0.8101,
+    "test_auc_roc": 0.8088
+  },
+  "inputs": {
+    "pclass": {"type": "int", "required": true, "description": "Passenger class (1, 2, or 3)"},
+    "sex": {"type": "str", "required": true, "description": "Sex (male or female)"},
+    "age": {"type": "float", "required": true, "description": "Passenger age"},
+    "sibsp": {"type": "int", "required": true, "description": "Number of siblings/spouses aboard"},
+    "parch": {"type": "int", "required": true, "description": "Number of parents/children aboard"},
+    "fare": {"type": "float", "required": true, "description": "Ticket fare"},
+    "embarked": {"type": "str", "required": true, "description": "Port of embarkation (C, Q, or S)"}
+  },
+  "outputs": {
+    "survival": {"type": "int", "description": "Prediction (0 = no, 1 = yes)"},
+    "probability": {"type": "float", "description": "Probability of survival"}
+  }
+}
