@@ -117,7 +117,11 @@ jobs:
       - name: Deploy
         run: |
           echo "Deploying image ${{ needs.build.outputs.image }} to dev"
-          docker pull ${{ needs.build.outputs.image }}
+          if [[ "${{ github.event_name }}" != "pull_request" ]]; then
+            docker pull ${{ needs.build.outputs.image }}
+          else
+            echo "Skipping docker pull for PR (image not pushed)"
+          fi
           echo "Dev deployment complete"
 
   deploy-staging:
