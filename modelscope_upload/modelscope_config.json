@@ -1,34 +1,15 @@
 {
-  "model_id": "titanic-survival-prediction",
+  "modelId": "bniladridas/lifeboat",
   "task": "tabular-classification",
   "license": "MIT",
-  "desc": "A lightweight gradient boosting model for Titanic passenger survival prediction. Trained on the classic Titanic dataset with 11 engineered features.",
+  "description": "A lightweight gradient boosting model for Titanic passenger survival prediction. Trained on the classic Titanic dataset with 11 engineered features.",
+  "framework": "scikit-learn",
   "parameters": {
     "num_features": 11,
-    "model_type": "GradientBoostingClassifier",
-    "n_estimators": 200,
-    "max_depth": 5,
-    "learning_rate": 0.1
+    "model_type": "GradientBoostingClassifier"
   },
   "performance": {
     "test_accuracy": 0.8101,
-    "test_auc_roc": 0.8088,
-    "cv_accuracy_mean": 0.8021,
-    "cv_accuracy_std": 0.0369
-  },
-  "files": [
-    "models/titanic_model.pkl",
-    "models/scaler.pkl",
-    "models/features.pkl",
-    "models/le_sex.pkl",
-    "models/le_embarked.pkl"
-  ],
-  "requirements": [
-    "pandas>=1.5.0",
-    "numpy>=1.21.0",
-    "scikit-learn>=1.0.0",
-    "xgboost>=1.7.0",
-    "lightgbm>=3.3.0",
-    "joblib>=1.1.0"
-  ]
+    "test_auc_roc": 0.8088
+  }
 }
