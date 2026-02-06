@@ -1,9 +1,8 @@
-import pytest
-import pandas as pd
-import numpy as np
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
+
 import joblib
-import os
+import numpy as np
+import pytest
 
 MODEL_DIR = "models"
 
