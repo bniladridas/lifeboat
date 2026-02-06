@@ -15,7 +15,7 @@
 
 ## Checklist
 
-- [ ] I have read the [Contributor Guide](../CONTRIBUTING.md) and followed the process outlined there for submitting PRs.
+- [ ] I have read the [Contributor Guide](../../CONTRIBUTING.md) and followed the process outlined there for submitting PRs.
 - [ ] I have read and followed the relevant style guides and ran the linter/formatter.
 - [ ] I signed the CLA (if applicable).
 - [ ] The title of the PR starts with the type of change in square brackets, e.g. `[feat]`, `[fix]`, `[docs]`, `[chore]`.
