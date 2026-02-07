@@ -1,9 +1,0 @@
-{
-  "name": "cla-bot",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0"
-  }
-}
