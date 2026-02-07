@@ -21,12 +21,12 @@ model, scaler, le_sex, le_embarked = load_artifacts()
 
 class PredictRequest(BaseModel):
     pclass: int
-    sex: str
-    age: float
-    sibsp: int
-    parch: int
-    fare: float
-    embarked: str
+    sex: Literal["male", "female"]
+    age: float = Field(..., ge=0)
+    sibsp: int = Field(..., ge=0)
+    parch: int = Field(..., ge=0)
+    fare: float = Field(..., ge=0)
+    embarked: Literal["C", "Q", "S"]
 
 
 @app.get("/")
