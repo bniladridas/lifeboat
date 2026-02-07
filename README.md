@@ -69,3 +69,4 @@ from modelscope import pipeline
 p = pipeline("tabular-classification", "bniladridas/lifeboat")
 p(pclass=3, sex="male", age=25, sibsp=0, parch=0, fare=7.25, embarked="S")
 ```
+# test
