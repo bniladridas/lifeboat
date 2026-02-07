@@ -1,0 +1,13 @@
+---
+
+name: CLA Check
+description: Verify contributors have signed the CLA
+author: org
+
+runs:
+  using: node20
+  main: index.js
+
+inputs:
+  github-token:
+    required: true
