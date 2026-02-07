@@ -45,15 +45,16 @@ def predict(request: PredictRequest):
     is_alone = 1 if family_size == 1 else 0
     fare_per_person = request.fare / family_size
 
-    age_bin = 0
-    if request.age > 12:
-        age_bin = 1
-    if request.age > 18:
-        age_bin = 2
-    if request.age > 35:
-        age_bin = 3
     if request.age > 60:
         age_bin = 4
+    elif request.age > 35:
+        age_bin = 3
+    elif request.age > 18:
+        age_bin = 2
+    elif request.age > 12:
+        age_bin = 1
+    else:
+        age_bin = 0
 
     sample = pd.DataFrame(
         {
