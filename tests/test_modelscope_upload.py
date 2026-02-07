@@ -1,6 +1,3 @@
-import pytest
-
-
 class TestModelscopeUpload:
     def test_import(self):
         import modelscope_upload

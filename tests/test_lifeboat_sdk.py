@@ -1,6 +1,3 @@
-import pytest
-
-
 class TestLifeboatSDK:
     def test_import(self):
         import lifeboat_sdk
