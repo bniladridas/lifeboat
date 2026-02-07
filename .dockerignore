@@ -13,7 +13,6 @@ build
 *.ipynb_checkpoints
 docs
 tests
-models
 .env
 *.log
 .DS_Store
