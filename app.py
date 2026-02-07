@@ -73,8 +73,9 @@ def predict(request: PredictRequest):
     )
 
     sample_scaled = scaler.transform(sample)
-    survival = int(model.predict(sample_scaled)[0])
-    probability = float(model.predict_proba(sample_scaled)[0][1])
+    proba = model.predict_proba(sample_scaled)
+    survival = int(proba[0].argmax())
+    probability = float(proba[0][1])
 
     return {"survival": survival, "probability": round(probability, 4)}
 
