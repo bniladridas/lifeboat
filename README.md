@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/basebin/lifeboat/main/.github/assets/thumbnail.png" alt="lifeboat" width="100%">
+  <img src="https://raw.githubusercontent.com/Coccinella-Labs/lifeboat/main/.github/assets/thumbnail.png" alt="lifeboat" width="100%">
 </p>
 
 ---
